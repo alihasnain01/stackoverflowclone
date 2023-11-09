@@ -6,6 +6,7 @@ import { base_url } from "../utils/constants";
 const Home = () => {
 
     const [pageNo, setPageNo] = useState(1);
+    const [totalPage, setTotalPage] = useState('');
     const [topicId, setTopicId]= useState('');
     const [topics, setTopics] = useState([]);
     const [issues, setIssues] = useState([]);
@@ -29,14 +30,18 @@ const Home = () => {
     }
 
     const fetchIssues = async (id = '', name = 'Latest Issues', search = '') => {
-        id ? setSearch('') : setSearch(search);
-        setTopicId? (id ? setTopicId(id) : setTopicId('')) : setTopicId(''); 
+        // id ? setSearch('') : setSearch(search);
+        // id ? setPageNo('') : setPageNo(pageNo);
+        // id ? setTopicId(id) : ( setTopicId? setTopicId(topicId): setTopicId(''));
+        // setTopicId? (id ? setTopicId(id) : setTopicId('')) : setTopicId(''); 
+        // console.log(pageNo);
         await axios.get(base_url+"issues?" + (id ? `?id=${id}` : '') + (search ? `&search=${search}` : "" ) + (pageNo >`` ? `&page=${pageNo}` : "" )).then(res => {
-            console.log(res);
-            setIssues(res?.data?.data?.data);
+            console.log(res);           
             res?.data?.data?.prev_page_url ? setPrevPage(true) : setPrevPage(false);
             res?.data?.data?.next_page_url ? setNextPage(true) : setNextPage(false);
-            res?.data?.data?.current_page ? setTopicId(res?.data?.data?.current_page): setTopicId(1);
+            // res?.data?.data?.current_page ? setPageNo(res?.data?.data?.current_page) : setPageNo('');
+            res?.data?.data?.last_page ? setTotalPage(res?.data?.data?.last_page) : setTotalPage('');
+            setIssues(res?.data?.data?.data);
         }).catch(err => console.log(err));
 
          setTopicName(name??'Latest Issues')
@@ -51,14 +56,16 @@ const Home = () => {
     const incrementPage= ()=>{
         let page=pageNo;
         page = page + 1;
+        console.log('page ' + page);
         setPageNo(page)
+        console.log(pageNo);
         fetchIssues('',topicName,'');
     }
 
     const decrementPage=()=>{
-        let page=pageNo;
-        page = page - 1;
-        // setPageNo(page)
+        // let page=pageNo;
+        // page = page - 1;
+        setPageNo(pageNo -1)
         fetchIssues('',topicName,'');
     }
 
@@ -103,7 +110,7 @@ const Home = () => {
                         issues.length > 0 ?
                          <div className="flex justify-center space-x-2 mt-5">
                             <button className={ prevPage ? "border-gray-800 font-bold p-2 rounded border-solid border-2" : "p-2 rounded border-gray-400  border-solid border-2"} disabled={!prevPage}  onClick={()=>decrementPage()}>Previous</button>
-                            <span className='mt-2'> {pageNo } of 10</span>
+                                <span className='mt-2'> {pageNo} of { totalPage }</span>
                             <button className={ nextPage ? "border-gray-700 font-bold p-2 rounded border-solid border-2 " : "p-2 rounded border-gray-400  border-solid border-2 ml-2"} disabled={!nextPage} onClick={()=>incrementPage()}>Next</button>
                         </div> :"" 
                     }
