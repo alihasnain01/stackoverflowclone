@@ -47,6 +47,7 @@ const Home = () => {
         fetchIssues('', name, search);
     }
     
+    
     const incrementPage= ()=>{
         let page=pageNo;
         page = page + 1;
