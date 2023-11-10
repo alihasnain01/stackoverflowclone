@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import Home from './components/Home';
+import IssueDetail from './components/IssueDetail';
 import Aboutus from './components/Aboutus';
 import Contactus from './components/Contactus';
 import reportWebVitals from './reportWebVitals';
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />
+      },
+      {
+        path: '/issues/:id',
+        element: <IssueDetail />
       },
       {
         path:'/about-us',

@@ -7,6 +7,7 @@ const Home = () => {
 
     const [pageNo, setPageNo] = useState(1);
     const [totalPage, setTotalPage] = useState('');
+    const [total,setTotal]=useState(0);
     const [topicId, setTopicId] = useState('');
     const [topics, setTopics] = useState([]);
     const [issues, setIssues] = useState([]);
@@ -37,6 +38,7 @@ const Home = () => {
             res?.data?.data?.prev_page_url ? setPrevPage(true) : setPrevPage(false);
             res?.data?.data?.next_page_url ? setNextPage(true) : setNextPage(false);
             res?.data?.data?.last_page ? setTotalPage(res?.data?.data?.last_page) : setTotalPage('');
+            res?.data?.data?.total? setTotal(res?.data?.data?.total) : setTotal(0);
             setIssues(res?.data?.data?.data);
         }).catch(err => console.log(err));
     }
@@ -80,7 +82,7 @@ const Home = () => {
                         <input className="p-2 border border-gray-400" type="text" placeholder="Search" onKeyUp={(e) => searchIssue(e.target.value)} />
                     </div>
                 </div>
-                <p className="mt-3 text-xl text-yellow-800 font-semibold">{topicName}</p>
+                <p className="mt-3 text-xl text-yellow-800 font-semibold">{topicName + ' (' + total + ')'}</p>
                 <div className="mt-5 mb-20">
                     <ul className="text-lg ml-1">
                         {
