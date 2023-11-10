@@ -1,40 +1,45 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import Home from './components/Home';
-import IssueDetail from './components/IssueDetail';
-import Aboutus from './components/Aboutus';
-import Contactus from './components/Contactus';
-import reportWebVitals from './reportWebVitals';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import Home from "./components/Home";
+import IssueDetail from "./components/IssueDetail";
+import Aboutus from "./components/Aboutus";
+import Contactus from "./components/Contactus";
+import reportWebVitals from "./reportWebVitals";
+import Category from "./components/Category";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
     children: [
       {
-        path: '/',
-        element: <Home />
+        path: "/",
+        element: <Home />,
       },
       {
-        path: '/issues/:id',
-        element: <IssueDetail />
+        path: "/categories",
+        element: <Category />,
       },
       {
-        path:'/about-us',
-        element: <Aboutus />
+        path: "/issues/:id",
+        element: <IssueDetail />,
       },
       {
-        path: '/contact-us',
-        element: <Contactus />
-      }
-    ]
-  }
-])
+        path: "/about-us",
+        element: <Aboutus />,
+      },
+      {
+        path: "/contact-us",
+        element: <Contactus />,
+      },
+    ],
+  },
+]);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <RouterProvider router={router} />
   // <React.StrictMode>

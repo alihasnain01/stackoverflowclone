@@ -7,6 +7,7 @@ const Header = () => {
                 <div className="text-gray-300 text-xl font-bold">Red Overflow</div>
                 <ul className="md:flex hidden font-semibold">
                     <li className="cursor-pointer text-gray-200 hover:text-gray-400 mx-[10px]"><NavLink to="/" >Home</NavLink></li>
+                    <NavLink to="/categories" className="cursor-pointer text-gray-200 hover:text-gray-400 mx-[10px]">Categories</NavLink>
                     <li className="cursor-pointer text-gray-200 hover:text-gray-400 mx-[10px]"><Link to="/contact-us">Contect Us</Link></li>
                     <li className="cursor-pointer text-gray-200 hover:text-gray-400 mx-[10px]"><NavLink to="/about-us">About Us</NavLink></li>
 
@@ -17,7 +18,7 @@ const Header = () => {
                 </div>
             </nav>
 
-            
+
         </>
     )
 }
