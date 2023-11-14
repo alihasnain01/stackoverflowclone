@@ -9,6 +9,7 @@ import Contactus from "./components/Contactus";
 import reportWebVitals from "./reportWebVitals";
 import Category from "./components/Category";
 import Login from "./components/Login";
+import Signup from "./components/Signup";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
+      {
+        path: "/signup",
+        element: <Signup />,
+      }
     ],
   },
 ]);
