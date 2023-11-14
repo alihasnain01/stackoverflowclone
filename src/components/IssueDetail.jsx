@@ -4,11 +4,14 @@ import axios from "axios";
 import { base_url } from "../utils/constants";
 import Solution from "./Solution";
 import SolutionSidebar from "./SolutionSidebar";
+import NoRecords from "./NoRecords";
+import Loader from "./Loader";
 
 const IssueDetail = () => {
 
     const { id } = useParams();
     const [issue, setIssue] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     
     const formatDate = (dateTimeString) => {
         const dateTime = new Date(dateTimeString);
@@ -28,16 +31,23 @@ const IssueDetail = () => {
     
     const fetchIssue = async () => {
         console.log('here');
+        setIsLoading(true);
         await axios.get(base_url + `issues/${id}`).then(res => {
             setIssue(res?.data?.data);
             console.log(res.data.data);
+            setIsLoading(false);
         }).catch(err => console.log(err));
     }
     
     return (
-        <div className="w-full flex justify-between p-10 md:px-40">
+        <div className=" flex justify-between">
+
             {
-                issue ? <SolutionSidebar issue={issue} /> : null
+                isLoading &&  <Loader />
+            }
+
+            {
+               !isLoading && issue ? <SolutionSidebar issue={issue} /> : null
             }                 
 
             {
@@ -47,7 +57,6 @@ const IssueDetail = () => {
                         {issue.title} <small className="text-sm text-blue-300 mx-1 font-semibold">({ formatDate(issue.created_at)})</small>
                     </h1>
                         <p className="text-gray-500 mt-8">{issue.description}</p>
-                        
                         <div className="w-full mt-8">
                             <h3 className="text-xl text-gray-600 font-medium">Solutions</h3>
                             {

@@ -99,7 +99,7 @@ const Home = () => {
                             <div className="flex justify-center space-x-2 mt-5">
                                 <button className={prevPage ? "border-gray-800 font-bold p-2 rounded border-solid border-2" : "p-2 rounded border-gray-400  border-solid border-2"} disabled={!prevPage} onClick={() => setPageNo(pageNo - 1)}>Previous</button>
                                 <span className='mt-2'> {pageNo} of {totalPage}</span>
-                                <button className={nextPage ? "border-gray-700 font-bold p-2 rounded border-solid border-2 " : "p-2 rounded border-gray-400  border-solid border-2 ml-2"} disabled={!nextPage} onClick={async () => setPageNo(pageNo + 1)}>Next</button>
+                                <button className={nextPage ? "border-gray-700 font-bold p-2 rounded border-solid border-2 " : "p-2 rounded border-gray-400 border-solid border-2 ml-2"} disabled={!nextPage} onClick={async () => setPageNo(pageNo + 1)}>Next</button>
                             </div> : ""
                     }
                 </div>
