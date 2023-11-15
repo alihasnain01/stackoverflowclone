@@ -1,6 +1,6 @@
 const SolutionSidebar = (props) => {
     return (
-        <div className="w-1/2 sm:w-1/3 mt-9 border border-gray-300 rounded-lg shadow-md h-80 md:h-[350px]">
+        <div className="w-1/2 sm:w-1/4 mt-9 border border-gray-300 rounded-lg shadow-md h-80 md:h-[350px]">
             <div className="mx-auto flex items-center justify-center mt-8">
                 <h5 className="text-xl font-medium">User Info</h5>
             </div>

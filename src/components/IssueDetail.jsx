@@ -5,27 +5,16 @@ import { base_url } from "../utils/constants";
 import Solution from "./Solution";
 import SolutionSidebar from "./SolutionSidebar";
 import Loader from "./Loader";
-
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { modules } from "../utils/constants";
+
 
 const IssueDetail = () => {
-
     const { id } = useParams();
     const [issue, setIssue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [value, setValue] = useState('');
-
-    const modules = {
-        toolbar: [
-            [{ 'header': [1, 2, 3, 4, false] }],
-            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-            [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
-            ['link', 'image'],
-            ['clean']
-        ]
-    };
-
     const formatDate = (dateTimeString) => {
         const dateTime = new Date(dateTimeString);
         return dateTime.toLocaleString('en-US', {
@@ -43,21 +32,16 @@ const IssueDetail = () => {
     }, [])
 
     const fetchIssue = async () => {
-        console.log('here');
         setIsLoading(true);
         await axios.get(base_url + `issues/${id}`).then(res => {
             setIssue(res?.data?.data);
-            console.log(res.data.data);
             setIsLoading(false);
         }).catch(err => console.log(err));
     }
 
     const submitSolution = async () => {
         if (value) {
-            // setIsLoading(true);
             const user = JSON.parse(localStorage.getItem('user'));
-            console.log('user', user);
-
             const config = {
                 headers: { Authorization: `Bearer ${user?.token}` }
             };
@@ -74,12 +58,13 @@ const IssueDetail = () => {
     return (
         <div className=" flex justify-between">
             {
-                isLoading && <Loader />
+                isLoading &&
+                <div className="flex items-center justify-center ml-[200px] md:ml-[600px] mt-60">
+                    <img src="https://img.icons8.com/fluent-systems-regular/100/000000/spinner.gif" alt="" />
+                </div>
             }
 
-            {
-                !isLoading && issue ? <SolutionSidebar issue={issue} /> : null
-            }
+            {(!isLoading && issue) && <SolutionSidebar issue={issue} />}
 
             {
                 issue &&
@@ -94,18 +79,16 @@ const IssueDetail = () => {
                             issue.solutions.length > 0 ?
                                 issue.solutions.map((item, index) => (
                                     <Solution key={index} issue={item} />
-                                ))
-                                : <p className="text-gray-500 mt-8">No solution yet</p>
+                                )) : <p className="text-gray-500 mt-8">No solution yet</p>
                         }
                     </div>
 
                     <div className="w-full mt-20 ">
                         <ReactQuill className="h-80" modules={modules} theme="snow" value={value} onChange={setValue} placeholder="Write your solution" />
-                        <div className="w-full ml-1 mt-10">
+                        <div className="w-full mt-10">
                             <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-lg mt-4" onClick={submitSolution}>Submit</button>
                         </div>
                     </div>
-
                 </div>
             }
         </div>
