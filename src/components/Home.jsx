@@ -39,7 +39,6 @@ const Home = () => {
     const fetchIssues = async () => {
         setIsIssueLoading(true);
         await axios.get(base_url + "issues?" + (topicId ? `?id=${topicId}` : '') + (search ? `&search=${search}` : "") + (pageNo > 0 ? `&page=${pageNo}` : "")).then(res => {
-            console.log(res);
             res?.data?.data?.prev_page_url ? setPrevPage(true) : setPrevPage(false);
             res?.data?.data?.next_page_url ? setNextPage(true) : setNextPage(false);
             res?.data?.data?.last_page ? setTotalPage(res?.data?.data?.last_page) : setTotalPage('');
@@ -53,6 +52,7 @@ const Home = () => {
         let name = search ? search : 'Latest Issues';
         setTopicName(name);
         setPageNo(1);
+        setTopicId('');
         setSearch(search);
     }
 
@@ -75,7 +75,7 @@ const Home = () => {
                         {
                             !isLoading && topics.length > 0 ?
                                 topics.map((item, index) => (
-                                    <li className="cursor-pointer font-semibold text-gray-500" onClick={() => changeTopic(item.id, item.name)} key={index}>{item.name}</li>
+                                    <li className={topicId === item.id ? "text-gray-700 cursor-pointer font-bold underline underline-offset-3" : "cursor-pointer font-semibold text-gray-400"} onClick={() => changeTopic(item.id, item.name)} key={index}>{item.name}</li>
                                 ))
                                 : !isLoading && <p className=" text-gray-400">No topics found</p>
                         }

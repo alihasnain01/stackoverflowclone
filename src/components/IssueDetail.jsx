@@ -18,7 +18,7 @@ const IssueDetail = () => {
 
     const modules = {
         toolbar: [
-            [{ 'header': [1, 2, false] }],
+            [{ 'header': [1, 2, 3, 4, false] }],
             ['bold', 'italic', 'underline', 'strike', 'blockquote'],
             [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
             ['link', 'image'],
@@ -66,7 +66,7 @@ const IssueDetail = () => {
                 issue &&
                 <div className="w-full mt-12 m-10">
                     <h1 className="text-xl text-gray-800 font-medium">
-                        {issue.title} <small className="text-sm text-blue-300 mx-1 font-normal">({formatDate(issue.created_at)})</small>
+                        {issue.title} <small className="text-blue-300 mx-1 font-semibold text-xs">({formatDate(issue.created_at)})</small>
                     </h1>
                     <p className="text-gray-500 mt-8">{issue.description}</p>
                     <div className="w-full mt-8">
@@ -81,7 +81,7 @@ const IssueDetail = () => {
                     </div>
 
                     <div className="w-full mt-20 ">
-                        <ReactQuill className="h-80" modules={modules} theme="snow" value={value} onChange={setValue} placeholder="Write your solution" readOnly />
+                        <ReactQuill className="h-80" modules={modules} theme="snow" value={value} onChange={setValue} placeholder="Write your solution" />
                     </div>
                     <div className="w-full ml-1 mt-10">
                         <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-lg mt-4">Submit</button>
