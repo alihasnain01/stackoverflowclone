@@ -52,6 +52,25 @@ const IssueDetail = () => {
         }).catch(err => console.log(err));
     }
 
+    const submitSolution = async () => {
+        if (value) {
+            // setIsLoading(true);
+            const user = JSON.parse(localStorage.getItem('user'));
+            console.log('user', user);
+
+            const config = {
+                headers: { Authorization: `Bearer ${user?.token}` }
+            };
+
+            await axios.post(base_url + `issues/${id}/solutions`, { description: value }, config).then(res => {
+                // setIssue(res?.data?.data);
+                // setValue('');
+                // setIsLoading(false);
+                console.log(res);
+            }).catch(err => console.log(err));
+        }
+    }
+
     return (
         <div className=" flex justify-between">
             {
@@ -82,11 +101,11 @@ const IssueDetail = () => {
 
                     <div className="w-full mt-20 ">
                         <ReactQuill className="h-80" modules={modules} theme="snow" value={value} onChange={setValue} placeholder="Write your solution" />
+                        <div className="w-full ml-1 mt-10">
+                            <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-lg mt-4" onClick={submitSolution}>Submit</button>
+                        </div>
                     </div>
-                    <div className="w-full ml-1 mt-10">
-                        <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-lg mt-4">Submit</button>
 
-                    </div>
                 </div>
             }
         </div>
