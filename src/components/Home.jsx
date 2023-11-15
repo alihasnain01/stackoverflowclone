@@ -68,14 +68,14 @@ const Home = () => {
             <div className="w-1/4 items-center flex flex-col" >
                 <h1 className="text-2xl font-bold">Categories</h1>
                 <div className="mt-10 ">
-                    <ul className="text-lg ">
+                    <ul className="text-lg space-y-1">
                         {
                             isLoading && <img className="mt-10" src="https://img.icons8.com/fluent-systems-regular/100/000000/spinner.gif" alt="" />
                         }
                         {
                             !isLoading && topics.length > 0 ?
                                 topics.map((item, index) => (
-                                    <li className="cursor-pointer text-gray-500" onClick={() => changeTopic(item.id, item.name)} key={index}>{item.name}</li>
+                                    <li className="cursor-pointer font-semibold text-gray-500" onClick={() => changeTopic(item.id, item.name)} key={index}>{item.name}</li>
                                 ))
                                 : !isLoading && <p className=" text-gray-400">No topics found</p>
                         }
@@ -88,7 +88,7 @@ const Home = () => {
                         <h1 className="text-2xl font-bold">Issues</h1>
                     </div>
                     <div className="md:block">
-                        <input className="p-2 border border-gray-400" type="text" placeholder="Search" onKeyUp={(e) => searchIssue(e.target.value)} />
+                        <input className="p-2 border border-gray-300 rounded-md" type="text" placeholder="Search" onKeyUp={(e) => searchIssue(e.target.value)} />
                     </div>
                 </div>
                 <p className="mt-3 text-xl text-yellow-800 font-semibold">{topicName + ' (' + total + ')'}</p>
@@ -110,12 +110,12 @@ const Home = () => {
                     </ul>
 
                     {
-                        !isIssueLoading && issues.length > 0 ?
-                            <div className="flex justify-center md:justify-end space-x-1 mt-8">
-                                <button className={prevPage ? "border-gray-800 font-bold p-2 underline underline-offset-4" : "p-2 text-gray-500 text-md"} disabled={!prevPage} onClick={() => setPageNo(pageNo - 1)}>Previous</button>
-                                <span className='mt-2'> {pageNo} of {totalPage}</span>
-                                <button className={nextPage ? "border-gray-700 font-bold p-2 underline underline-offset-4" : "p-2 rounded text-gray-600 text-md"} disabled={!nextPage} onClick={async () => setPageNo(pageNo + 1)}>Next</button>
-                            </div> : ""
+                        (!isIssueLoading && issues.length > 0) &&
+                        <div className="flex justify-center md:justify-end space-x-1 mt-8">
+                            <button className={prevPage ? "border-gray-800 font-bold p-2 underline underline-offset-4" : "p-2 text-gray-500 text-md"} disabled={!prevPage} onClick={() => setPageNo(pageNo - 1)}>Previous</button>
+                            <span className='mt-2'> {pageNo} of {totalPage}</span>
+                            <button className={nextPage ? "border-gray-700 font-bold p-2 underline underline-offset-4" : "p-2 rounded text-gray-600 text-md"} disabled={!nextPage} onClick={async () => setPageNo(pageNo + 1)}>Next</button>
+                        </div>
                     }
                 </div>
             </div>

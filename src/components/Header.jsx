@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 const Header = () => {
+
+    const state = useSelector((state) => state.login)
+    console.log(state);
+
     const [isLogin, setIsLogin] = useState(false);
-    const [user,setUser]=useState('');
-    
+    const [user, setUser] = useState('');
+
     useEffect(() => {
         if (localStorage.getItem('user')) {
             setIsLogin(true);
             setUser(JSON.parse(localStorage.getItem('user')));
         }
-    },[])
+    }, [])
 
     return (
         <>
@@ -29,13 +34,13 @@ const Header = () => {
                             <div className="hidden md:block px-3 py-2 bg-indigo-700 text-white cursor-pointer font-bold rounded"><NavLink to="/signup">Sign Up</NavLink></div>
                         </div>
                         : <div className="flex items-center space-x-2">
-                            <p className="hidden md:block text-white font-semibold">Welcome, {user.name} | </p> 
+                            <p className="hidden md:block text-white font-semibold">Welcome, {user.name} | </p>
                             <p className="hidden md:block text-red-500 font-bold cursor-pointer" onClick={() => { localStorage.removeItem('user'); setIsLogin(false); }}>Logout</p>
                         </div>
                 }
 
                 <div className="md:hidden">
-                    <a className="text-4xl" href="javascript:vodi(0)">&#8801;</a>
+                    <a className="text-4xl" href="#">&#8801;</a>
                 </div>
             </nav>
 

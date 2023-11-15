@@ -4,31 +4,44 @@ import axios from "axios";
 import { base_url } from "../utils/constants";
 import Solution from "./Solution";
 import SolutionSidebar from "./SolutionSidebar";
-import NoRecords from "./NoRecords";
 import Loader from "./Loader";
+
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const IssueDetail = () => {
 
     const { id } = useParams();
     const [issue, setIssue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    
+    const [value, setValue] = useState('');
+
+    const modules = {
+        toolbar: [
+            [{ 'header': [1, 2, false] }],
+            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+            ['link', 'image'],
+            ['clean']
+        ]
+    };
+
     const formatDate = (dateTimeString) => {
         const dateTime = new Date(dateTimeString);
         return dateTime.toLocaleString('en-US', {
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric',
-          hour: 'numeric',
-          minute: 'numeric',
-          hour12: true,
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true,
         });
     };
 
-    useEffect( () => {
+    useEffect(() => {
         fetchIssue();
-    },[] )
-    
+    }, [])
+
     const fetchIssue = async () => {
         console.log('here');
         setIsLoading(true);
@@ -38,40 +51,46 @@ const IssueDetail = () => {
             setIsLoading(false);
         }).catch(err => console.log(err));
     }
-    
+
     return (
         <div className=" flex justify-between">
-
             {
-                isLoading &&  <Loader />
+                isLoading && <Loader />
             }
 
             {
-               !isLoading && issue ? <SolutionSidebar issue={issue} /> : null
-            }                 
+                !isLoading && issue ? <SolutionSidebar issue={issue} /> : null
+            }
 
             {
-                issue ? 
+                issue &&
                 <div className="w-full mt-12 m-10">
                     <h1 className="text-xl text-gray-800 font-medium">
-                        {issue.title} <small className="text-sm text-blue-300 mx-1 font-semibold">({ formatDate(issue.created_at)})</small>
+                        {issue.title} <small className="text-sm text-blue-300 mx-1 font-normal">({formatDate(issue.created_at)})</small>
                     </h1>
-                        <p className="text-gray-500 mt-8">{issue.description}</p>
-                        <div className="w-full mt-8">
-                            <h3 className="text-xl text-gray-600 font-medium">Solutions</h3>
-                            {
-                                issue.solutions.length > 0 ?
-                                    issue.solutions.map((item, index) => (
-                                       <Solution key={index} issue={item} />
-                                     ))
-                                : <p className="text-gray-500 mt-8">No solution yet</p>        
-                            }
-                        </div>
-              </div>
-                : null
-           } 
+                    <p className="text-gray-500 mt-8">{issue.description}</p>
+                    <div className="w-full mt-8">
+                        <h3 className="text-xl text-gray-600 font-medium">Solutions</h3>
+                        {
+                            issue.solutions.length > 0 ?
+                                issue.solutions.map((item, index) => (
+                                    <Solution key={index} issue={item} />
+                                ))
+                                : <p className="text-gray-500 mt-8">No solution yet</p>
+                        }
+                    </div>
+
+                    <div className="w-full mt-20 ">
+                        <ReactQuill className="h-80" modules={modules} theme="snow" value={value} onChange={setValue} placeholder="Write your solution" readOnly />
+                    </div>
+                    <div className="w-full ml-1 mt-10">
+                        <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-lg mt-4">Submit</button>
+
+                    </div>
+                </div>
+            }
         </div>
-    ) 
+    )
 }
 
 export default IssueDetail;

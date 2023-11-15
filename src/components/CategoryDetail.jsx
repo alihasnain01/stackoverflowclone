@@ -2,7 +2,7 @@ const CategoryDetail = (props) => {
     return (
         props ?
             <div>
-                <li className="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
+                <li className="col-span-1 bg-white rounded-lg shadow divide-y border border-gray-250 divide-gray-400">
                     <div className="w-full flex items-center justify-between p-6 space-x-6">
                         <div className="min-w-0 flex-1 h-30">
 

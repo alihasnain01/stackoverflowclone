@@ -46,26 +46,26 @@ const Cetegory = () => {
 
             <div className="mt-8">
                 <div className="ml-1 mb-5 flex justify-end">
-                    <input type="text" className="p-1.5 border border-gray-400 rounded-md focus:border-gray-600" placeholder="search category" onKeyUp={(e) => searchCategory(e.target.value)} />
+                    <input type="text" className="p-2 border border-gray-300 rounded-md focus:border-gray-600" placeholder="search category" onKeyUp={(e) => searchCategory(e.target.value)} />
                 </div>
                 {
-                    isLoading && 
-                        <Loader /> 
+                    isLoading &&
+                    <Loader />
                 }
 
                 <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     {
-                      !isLoading && topics.length > 0 ?
+                        !isLoading && topics.length > 0 ?
                             topics.map((topic) => (
                                 <CategoryDetail key={topic.id} topic={topic} />
-                            )) :  !isLoading && <NoRecords/>
-                           
+                            )) : !isLoading && <NoRecords />
+
                     }
                 </ul>
 
                 {
-                   ( topics.length > 0 && totalPage>1) &&
-                    <div className="flex justify-end space-x-2 mt-9">
+                    (topics.length > 0 && totalPage > 1) &&
+                    <div className="flex justify-center md:justify-end space-x-2 mt-9">
                         <button className={prevPage ? "border-gray-800 font-bold p-2 text-md underline underline-offset-4" : "p-2 text-gray-600 text-md"} disabled={!prevPage} onClick={() => setPageNo(pageNo - 1)}>Previous</button>
                         <span className='mt-2'> {pageNo} of {totalPage}</span>
                         <button className={nextPage ? "border-gray-700 font-bold p-2 text-md underline underline-offset-4" : "p-2 ml-2 text-gray-600 text--md"} disabled={!nextPage} onClick={async () => setPageNo(pageNo + 1)}>Next</button>
