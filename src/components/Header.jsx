@@ -16,8 +16,8 @@ const Header = () => {
                 {
                     !isLogin.value ?
                         <div className="flex items-center space-x-2">
-                            <div className="hidden md:block px-3 py-2 text-white cursor-pointer font-bold rounded border"><NavLink to="/login">Log in</NavLink></div>
-                            <div className="hidden md:block px-3 py-2 bg-indigo-700 text-white cursor-pointer font-bold rounded"><NavLink to="/signup">Sign Up</NavLink></div>
+                            <NavLink to="/login">  <div className="hidden md:block px-3 py-2 text-white cursor-pointer font-bold rounded border">Log in</div></NavLink>
+                            <NavLink to="/signup"><div className="hidden md:block px-3 py-2 bg-indigo-700 text-white cursor-pointer font-bold rounded">Sign Up</div></NavLink>
                         </div>
                         : <div className="flex items-center space-x-2">
                             <p className="hidden md:block text-white font-semibold">Welcome, {isLogin.value.name} | </p>
