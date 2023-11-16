@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import { base_url } from "../utils/constants";
 import Solution from "./Solution";
 import SolutionSidebar from "./SolutionSidebar";
 import Loader from "./Loader";
-
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { isLogin } from "../App";
+import { Link } from "react-router-dom";
 
 const IssueDetail = () => {
-
     const { id } = useParams();
     const [issue, setIssue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [value, setValue] = useState('');
+    const location = useLocation();
 
     const modules = {
         toolbar: [
@@ -43,7 +44,6 @@ const IssueDetail = () => {
     }, [])
 
     const fetchIssue = async () => {
-        console.log('here');
         setIsLoading(true);
         await axios.get(base_url + `issues/${id}`).then(res => {
             setIssue(res?.data?.data);
@@ -100,10 +100,16 @@ const IssueDetail = () => {
                     </div>
 
                     <div className="w-full mt-20 ">
-                        <ReactQuill className="h-80" modules={modules} theme="snow" value={value} onChange={setValue} placeholder="Write your solution" />
-                        <div className="w-full ml-1 mt-10">
-                            <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-lg mt-4" onClick={submitSolution}>Submit</button>
-                        </div>
+                        <ReactQuill className="h-80" modules={modules} theme="snow" value={value} onChange={setValue} placeholder="Write your solution" readOnly={!isLogin.value ? true : false} />
+                        {
+                            isLogin.value ?
+                                <div className="w-full ml-1 mt-10">
+                                    <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-lg mt-4" onClick={submitSolution}>Submit</button>
+                                </div>
+                                : <div className="w-full ml-1 mt-16">
+                                    <Link to='/login' className="bg-gray-600 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded-lg mt-4" state={{ from: location }}>Login to submit</Link>
+                                </div>
+                        }
                     </div>
 
                 </div>

@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { isLogin } from "../App";
 
 const Login = () => {
 
     const navigate = useNavigate();
+    const location = useLocation();
+    const prevLocation = location.state?.from || "/";
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [emailErr, setEmailErr] = useState('');
@@ -31,7 +33,7 @@ const Login = () => {
             } else {
                 localStorage.setItem('user', JSON.stringify(res?.data?.data));
                 isLogin.value = res?.data?.data;
-                navigate('/');
+                navigate(prevLocation, { replace: true });
             }
         }).catch(err => {
             setIsLoading(false);
@@ -55,13 +57,7 @@ const Login = () => {
                     <div className="mb-5">
                         <label htmlFor="email">Email</label>
                         <br />
-                        <input
-                            type="email"
-                            id="email"
-                            className="p-2 border rounded-md w-full"
-                            placeholder="Enter your email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                        <input type="email" id="email" className="p-2 border rounded-md w-full" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)}
                             required
                         />
                         {
@@ -72,13 +68,7 @@ const Login = () => {
                     <div className="mb-5">
                         <label htmlFor="password">Password</label>
                         <br />
-                        <input
-                            type="password"
-                            id="password"
-                            className="p-2 border rounded-md w-full"
-                            placeholder="Enter your password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                        <input type="password" id="password" className="p-2 border rounded-md w-full" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)}
                             required
                         />
                         {
