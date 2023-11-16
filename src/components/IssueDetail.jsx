@@ -47,17 +47,13 @@ const IssueDetail = () => {
         setIsLoading(true);
         await axios.get(base_url + `issues/${id}`).then(res => {
             setIssue(res?.data?.data);
-            console.log(res.data.data);
             setIsLoading(false);
         }).catch(err => console.log(err));
     }
 
     const submitSolution = async () => {
         if (value) {
-            // setIsLoading(true);
             const user = JSON.parse(localStorage.getItem('user'));
-            console.log('user', user);
-
             const config = {
                 headers: { Authorization: `Bearer ${user?.token}` }
             };
@@ -74,12 +70,13 @@ const IssueDetail = () => {
     return (
         <div className=" flex justify-between">
             {
-                isLoading && <Loader />
+                isLoading &&
+                <div className="flex items-center justify-center ml-[200px] md:ml-[600px] mt-60">
+                    <img src="https://img.icons8.com/fluent-systems-regular/100/000000/spinner.gif" alt="" />
+                </div>
             }
 
-            {
-                !isLoading && issue ? <SolutionSidebar issue={issue} /> : null
-            }
+            {(!isLoading && issue) && <SolutionSidebar issue={issue} />}
 
             {
                 issue &&
@@ -94,8 +91,7 @@ const IssueDetail = () => {
                             issue.solutions.length > 0 ?
                                 issue.solutions.map((item, index) => (
                                     <Solution key={index} issue={item} />
-                                ))
-                                : <p className="text-gray-500 mt-8">No solution yet</p>
+                                )) : <p className="text-gray-500 mt-8">No solution yet</p>
                         }
                     </div>
 
@@ -111,7 +107,6 @@ const IssueDetail = () => {
                                 </div>
                         }
                     </div>
-
                 </div>
             }
         </div>
