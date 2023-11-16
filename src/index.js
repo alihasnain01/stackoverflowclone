@@ -11,8 +11,7 @@ import Category from "./components/Category";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Provider } from "react-redux";
-import { store } from "./components/state/store";
+import { isLogin } from "./App";
 
 const router = createBrowserRouter([
   {
@@ -41,11 +40,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <Login />,
+        element: isLogin ? <Home /> : <Login />,
       },
       {
         path: "/signup",
-        element: <Signup />,
+        element: isLogin ? <Home /> : <Signup />,
       }
     ],
   },
@@ -53,9 +52,7 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Provider store={store}>
-    <RouterProvider router={router} />
-  </Provider>
+  <RouterProvider router={router} />
   // <React.StrictMode>
   //   <App />
   // </React.StrictMode>

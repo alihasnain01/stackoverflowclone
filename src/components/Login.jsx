@@ -1,21 +1,22 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { isLogin } from "../App";
 
 const Login = () => {
 
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [emailErr, setEmailErr] = useState('');
     const [passwordErr, setPasswordErr] = useState('');
     const [loginErr, setLoginErr] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    
+
 
     useEffect(() => {
-       document.title='Login' 
-    },[])
+        document.title = 'Login'
+    }, [])
 
     const hanldeLogin = async (e) => {
         e.preventDefault();
@@ -29,6 +30,7 @@ const Login = () => {
                 setLoginErr(res?.data?.msg);
             } else {
                 localStorage.setItem('user', JSON.stringify(res?.data?.data));
+                isLogin.value = res?.data?.data;
                 navigate('/');
             }
         }).catch(err => {
@@ -46,7 +48,7 @@ const Login = () => {
                 <h1 className="text-xl font-bold text-blue-700 mb-1 ">Welcome Back</h1>
                 <p className="text-sm font-semibold text-gray-500 mt-3 mb-5">Please Enter Credentials</p>
                 {
-                    loginErr &&  <small className="text-red-500 font-semibold">{loginErr}</small>
+                    loginErr && <small className="text-red-500 font-semibold">{loginErr}</small>
                 }
 
                 <form action="" onSubmit={hanldeLogin}>
@@ -64,7 +66,7 @@ const Login = () => {
                         />
                         {
                             emailErr &&
-                            <small className="text-red-500 font-semibold">{ emailErr}</small>
+                            <small className="text-red-500 font-semibold">{emailErr}</small>
                         }
                     </div>
                     <div className="mb-5">
@@ -79,16 +81,16 @@ const Login = () => {
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
-                         {
+                        {
                             passwordErr &&
-                            <small className="text-red-500 font-semibold">{ passwordErr}</small>
+                            <small className="text-red-500 font-semibold">{passwordErr}</small>
                         }
                     </div>
 
                     {
-                        isLoading ?  <img src="https://img.icons8.com/fluent-systems-regular/100/000000/spinner.gif" alt="" />  : <button type="submit" className="border rounded-md p-2 font-md bg-gray-600 text-white">Login</button>
+                        isLoading ? <img src="https://img.icons8.com/fluent-systems-regular/100/000000/spinner.gif" alt="" /> : <button type="submit" className="border rounded-md p-2 font-md bg-gray-600 text-white">Login</button>
                     }
-                      
+
                 </form>
             </div>
         </div>

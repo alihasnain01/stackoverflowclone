@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { isLogin } from "../App";
 
 const Signup = () => {
-    
+
     const navigate = useNavigate();
     const [signinErr, setSigninErr] = useState('');
     const [name, setName] = useState('');
@@ -14,7 +15,7 @@ const Signup = () => {
     const [passwordErr, setPasswordErr] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
-    const signinHandler=(e)=>{
+    const signinHandler = (e) => {
         e.preventDefault();
         setEmailErr('');
         setPasswordErr('');
@@ -26,6 +27,7 @@ const Signup = () => {
                 setSigninErr(res?.data?.msg);
             } else {
                 localStorage.setItem('user', JSON.stringify(res?.data?.data));
+                isLogin.value = res?.data?.data;
                 navigate('/');
             }
         }).catch(err => {
@@ -42,11 +44,11 @@ const Signup = () => {
             <div className="border border-gray-200 rounded-lg shadow-md p-10 w-1/2">
                 <h1 className="text-xl font-bold text-green-700 mb-5 ">Welcome to RedStack</h1>
                 {
-                    signinErr &&  <small className="text-red-500 font-semibold">{signinErr}</small>
+                    signinErr && <small className="text-red-500 font-semibold">{signinErr}</small>
                 }
 
                 <form action="" onSubmit={signinHandler}>
-                <div className="mb-5">
+                    <div className="mb-5">
                         <label htmlFor="email">Name</label>
                         <br />
                         <input
@@ -60,7 +62,7 @@ const Signup = () => {
                         />
                         {
                             nameErr &&
-                            <small className="text-red-500 font-semibold">{ nameErr}</small>
+                            <small className="text-red-500 font-semibold">{nameErr}</small>
                         }
                     </div>
                     <div className="mb-5">
@@ -77,7 +79,7 @@ const Signup = () => {
                         />
                         {
                             emailErr &&
-                            <small className="text-red-500 font-semibold">{ emailErr}</small>
+                            <small className="text-red-500 font-semibold">{emailErr}</small>
                         }
                     </div>
                     <div className="mb-5">
@@ -94,14 +96,14 @@ const Signup = () => {
                         />
                         {
                             passwordErr &&
-                            <small className="text-red-500 font-semibold">{ passwordErr}</small>
+                            <small className="text-red-500 font-semibold">{passwordErr}</small>
                         }
                     </div>
 
                     {
-                        isLoading ?  <img src="https://img.icons8.com/fluent-systems-regular/100/000000/spinner.gif" alt="" />  : <button type="submit" className="border rounded-md p-2 font-md bg-gray-600 text-white">Sign Up</button>
+                        isLoading ? <img src="https://img.icons8.com/fluent-systems-regular/100/000000/spinner.gif" alt="" /> : <button type="submit" className="border rounded-md p-2 font-md bg-gray-600 text-white">Sign Up</button>
                     }
-                    
+
                 </form>
             </div>
         </div>
