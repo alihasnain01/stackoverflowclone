@@ -12,7 +12,7 @@ const Solution = (props) => {
     };
 
     return (
-        <div className="border border-gray-300 m-3 p-3 rounded-md" >
+        <div className="border border-gray-300 m-3 p-3 rounded-lg shadow-md" >
             <p className=" text-gray-800 font-medium">
                 {props.issue.description} <small className="text-xs text-blue-300 mx-1 font-semibold">({formatDate(props.issue.created_at)})</small>
             </p>

@@ -10,8 +10,8 @@ import reportWebVitals from "./reportWebVitals";
 import Category from "./components/Category";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import Users from "./components/Users";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { isLogin } from "./App";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +27,10 @@ const router = createBrowserRouter([
         element: <Category />,
       },
       {
+        path: "/users",
+        element: <Users />,
+      },
+      {
         path: "/issues/:id",
         element: <IssueDetail />,
       },
@@ -40,11 +44,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/login",
-        element: isLogin.value ? <Home /> : <Login />,
+        element: <Login />,
       },
       {
         path: "/signup",
-        element: isLogin.value ? <Home /> : <Signup />,
+        element: <Signup />,
       }
     ],
   },

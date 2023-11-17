@@ -91,11 +91,11 @@ const IssueDetail = () => {
                             issue.solutions.length > 0 ?
                                 issue.solutions.map((item, index) => (
                                     <Solution key={index} issue={item} />
-                                )) : <p className="text-gray-500 mt-8">No solution yet</p>
+                                )) : <p className="text-gray-400 font-semibold mt-5 ml-2">No solution yet</p>
                         }
                     </div>
 
-                    <div className="w-full mt-20 ">
+                    <div className="w-full mt-20 m-2 p-2">
                         <ReactQuill className="h-80" modules={modules} theme="snow" value={value} onChange={setValue} placeholder="Write your solution" readOnly={!isLogin.value ? true : false} />
                         {
                             isLogin.value ?

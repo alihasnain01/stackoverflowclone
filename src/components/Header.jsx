@@ -10,6 +10,7 @@ const Header = () => {
                 <ul className="md:flex hidden font-semibold space-x-10 cursor-pointer text-gray-200">
                     <NavLink to="/" className={({ isActive }) => isActive ? "text-gray-400 font-extrabold" : "text-gray-200 hover:text-gray-400"} >Home</NavLink>
                     <NavLink to="/categories" className={({ isActive }) => isActive ? "text-gray-400 font-extrabold" : "text-gray-200 hover:text-gray-400"}>Categories</NavLink>
+                    <NavLink to="/users" className={({ isActive }) => isActive ? "text-gray-400 font-extrabold" : "text-gray-200 hover:text-gray-400"}>Users</NavLink>
                     <NavLink to="/about-us" className={({ isActive }) => isActive ? "text-gray-400 font-extrabold" : "text-gray-200 hover:text-gray-400"}>About Us</NavLink>
                 </ul>
 

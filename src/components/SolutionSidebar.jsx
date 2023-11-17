@@ -2,8 +2,8 @@ const SolutionSidebar = (props) => {
     return (
         <div className="w-1/3 hidden md:block  mt-9 border border-gray-300 rounded-2xl shadow-lg h-80 md:h-[350px]">
             <div className="mx-auto mt-8 flex flex-col items-center justify-center space-y-4">
-                <img width="40" height="40" src="https://img.icons8.com/officexs/40/user.png" alt="user" />
-                <h5 className="text-lg font-medium text-blue-600">{props.issue ? props.issue.user.name : 'N/A'}</h5>
+                <img className="w-16 h-16 rounded-full mr-2" src="https://img.icons8.com/officexs/40/user.png" alt="user" />
+                <h5 className="text-lg font-medium text-blue-500 underline">{props.issue ? props.issue.user.name : 'N/A'}</h5>
             </div>
             <div className="flex items-center justify-center">
                 <hr className="border-gray-300 w-10 md:w-40 font-bold mt-5" />
