@@ -4,7 +4,6 @@ import axios from "axios";
 import { base_url } from "../utils/constants";
 import Solution from "./Solution";
 import SolutionSidebar from "./SolutionSidebar";
-import Loader from "./Loader";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { isLogin } from "../App";
@@ -41,6 +40,8 @@ const IssueDetail = () => {
 
     useEffect(() => {
         fetchIssue();
+
+        // eslint-disable-next-line
     }, [])
 
     const fetchIssue = async () => {

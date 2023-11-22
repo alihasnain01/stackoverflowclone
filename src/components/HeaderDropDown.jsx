@@ -1,15 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { isLogin } from "../App";
+
 const HeaderDropDown = () => {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
 
     const toggleDropdown = () => {
         setDropdownOpen(!isDropdownOpen);
     };
 
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleOutsideClick = (event) => {
+            if (isDropdownOpen && dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener("click", handleOutsideClick);
+
+        return () => {
+            document.removeEventListener("click", handleOutsideClick);
+        };
+    }, [isDropdownOpen]);
+
     return (
-        <div className="flex items-center space-x-4">
-            <div className="relative">
+        <div className="items-center space-x-4">
+            <div className="relative" ref={dropdownRef}>
                 <button
                     className="flex items-center text-white focus:outline-none"
                     onClick={toggleDropdown}

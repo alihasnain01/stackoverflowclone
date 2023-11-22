@@ -18,11 +18,12 @@ const Cetegory = () => {
     useEffect(() => {
         document.title = 'Categories';
         fetchTopics();
+        // eslint-disable-next-line
     }, [pageNo, search])
 
     const fetchTopics = async () => {
         setIsLoading(true);
-        await axios.get(base_url + 'categories' + `?page=${pageNo}` + (search ? `&search=${search}` : ""))
+        await axios.get(base_url + `categories?page=${pageNo}` + (search ? `&search=${search}` : ""))
             .then(res => {
                 res?.data?.data?.prev_page_url ? setPrevPage(true) : setPrevPage(false);
                 res?.data?.data?.next_page_url ? setNextPage(true) : setNextPage(false);
@@ -49,8 +50,7 @@ const Cetegory = () => {
                     <input type="text" className="p-2 border border-gray-300 rounded-md focus:border-gray-600" placeholder="search category" onKeyUp={(e) => searchCategory(e.target.value)} />
                 </div>
                 {
-                    isLoading &&
-                    <Loader />
+                    isLoading && <Loader />
                 }
 
                 <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -59,7 +59,6 @@ const Cetegory = () => {
                             topics.map((topic) => (
                                 <CategoryDetail key={topic.id} topic={topic} />
                             )) : !isLoading && <NoRecords />
-
                     }
                 </ul>
 
@@ -71,7 +70,6 @@ const Cetegory = () => {
                         <button className={nextPage ? "border-gray-700 font-bold p-2 text-md underline underline-offset-4" : "p-2 ml-2 text-gray-600 text--md"} disabled={!nextPage} onClick={async () => setPageNo(pageNo + 1)}>Next</button>
                     </div>
                 }
-
             </div>
         </>
     )

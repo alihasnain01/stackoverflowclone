@@ -21,10 +21,12 @@ const Home = () => {
     useEffect(() => {
         document.title = 'Home';
         fetchTopics();
+        // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
         fetchIssues();
+        // eslint-disable-next-line
     }, [pageNo, topicId, search]);
 
     const fetchTopics = async () => {
