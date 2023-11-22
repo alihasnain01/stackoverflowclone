@@ -23,13 +23,17 @@ const HeaderDropDown = () => {
                 </button>
 
                 {isDropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded shadow-lg">
+                    <div className="absolute right-10 mt-4 w-40 bg-white border border-gray-300 rounded shadow-lg">
                         <button className="block px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer w-full text-left">
+                            <img width={20} src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" />
                             Profile
                         </button>
+                        <hr />
                         <button className="block px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer w-full text-left">
+                            <img src="" alt="" />
                             Settings
                         </button>
+                        <hr />
                         <button className="block px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer w-full text-left" onClick={() => { isLogin.value = ''; }}>
                             Logout
                         </button>
