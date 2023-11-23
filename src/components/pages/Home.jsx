@@ -67,7 +67,7 @@ const Home = () => {
 
     return (
         <div className="w-full flex justify-between">
-            <div className="hidden md:block w-1/4 items-center flex flex-col" >
+            <div className="hidden md:block w-1/4 items-center flex-col" >
                 <h1 className="text-2xl font-bold">Categories</h1>
                 <div className="mt-10 ">
                     <ul className="text-lg space-y-1">
