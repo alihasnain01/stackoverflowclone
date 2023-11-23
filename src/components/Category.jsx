@@ -47,18 +47,16 @@ const Cetegory = () => {
 
             <div className="mt-8">
                 <div className="ml-1 mb-5 flex justify-end">
-                    <input type="text" className="p-2 border border-gray-300 rounded-md focus:border-gray-600" placeholder="search category" onKeyUp={(e) => searchCategory(e.target.value)} />
+                    <input type="text" className="p-2 border border-gray-300 rounded-md focus:border-gray-100" placeholder="search category" onKeyUp={(e) => searchCategory(e.target.value)} />
                 </div>
-                {
-                    isLoading && <Loader />
-                }
+
+                {isLoading && <Loader />}
 
                 <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                    {
-                        !isLoading && topics.length > 0 ?
-                            topics.map((topic) => (
-                                <CategoryDetail key={topic.id} topic={topic} />
-                            )) : !isLoading && <NoRecords />
+                    {!isLoading && topics.length > 0 ?
+                        topics.map((topic) => (
+                            <CategoryDetail key={topic.id} topic={topic} />
+                        )) : !isLoading && <NoRecords />
                     }
                 </ul>
 
