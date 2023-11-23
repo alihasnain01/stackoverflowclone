@@ -67,19 +67,17 @@ const Home = () => {
 
     return (
         <div className="w-full flex justify-between">
-            <div className="w-1/4 items-center flex flex-col" >
+            <div className="hidden md:block w-1/4 items-center flex flex-col" >
                 <h1 className="text-2xl font-bold">Categories</h1>
                 <div className="mt-10 ">
                     <ul className="text-lg space-y-1">
-                        {
-                            isLoading && <img className="mt-10" src="https://img.icons8.com/fluent-systems-regular/100/000000/spinner.gif" alt="" />
-                        }
-                        {
-                            !isLoading && topics.length > 0 ?
-                                topics.map((item, index) => (
-                                    <li className={topicId === item.id ? "text-gray-700 cursor-pointer font-bold underline underline-offset-3" : "cursor-pointer font-semibold text-gray-400"} onClick={() => changeTopic(item.id, item.name)} key={index}>{item.name}</li>
-                                ))
-                                : !isLoading && <p className=" text-gray-400">No topics found</p>
+                        {isLoading && <img className="mt-10" src="https://img.icons8.com/fluent-systems-regular/100/000000/spinner.gif" alt="" />}
+
+                        {!isLoading && topics.length > 0 ?
+                            topics.map((item, index) => (
+                                <li className={topicId === item.id ? "text-gray-700 cursor-pointer font-bold underline underline-offset-3" : "cursor-pointer font-semibold text-gray-400"} onClick={() => changeTopic(item.id, item.name)} key={index}>{item.name}</li>
+                            ))
+                            : !isLoading && <p className=" text-gray-400">No topics found</p>
                         }
                     </ul>
                 </div>
