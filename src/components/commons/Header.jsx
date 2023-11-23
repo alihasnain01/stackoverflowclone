@@ -26,11 +26,8 @@ const Header = () => {
                     <div className="mt-1.5">
                         <HeaderDropDown />
                     </div>
-
                     <button className="text-4xl" href="#">&#8801;</button>
                 </div>
-
-
             </nav >
         </>
     )
