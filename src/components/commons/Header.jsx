@@ -1,8 +1,8 @@
 
 import { NavLink } from "react-router-dom";
-import { isLogin } from "../App";
-import HeaderDropDown from "./HeaderDropDown";
-import AuthHeder from "./commons/AuthHeader";
+import { isLogin } from "../../App";
+import HeaderDropDown from "../HeaderDropDown";
+import AuthHeder from "./AuthHeader";
 const Header = () => {
     return (
         <>
