@@ -18,7 +18,6 @@ const HeaderDropDown = () => {
         };
 
         document.addEventListener("click", handleOutsideClick);
-
         return () => {
             document.removeEventListener("click", handleOutsideClick);
         };
@@ -27,15 +26,8 @@ const HeaderDropDown = () => {
     return (
         <div className="items-center space-x-4">
             <div className="relative" ref={dropdownRef}>
-                <button
-                    className="flex items-center text-white focus:outline-none"
-                    onClick={toggleDropdown}
-                >
-                    <img
-                        src="https://cdn-icons-png.flaticon.com/512/149/149071.png"  // Replace with your avatar image URL
-                        alt="Avatar"
-                        className="w-8 h-8 rounded-full mr-2"
-                    />
+                <button className="flex items-center text-white focus:outline-none" onClick={toggleDropdown} >
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Avatar" className="w-8 h-8 rounded-full mr-2" />
                     <span className="hidden md:block"> {isLogin.value.name}</span>
                 </button>
 
