@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { isLogin } from "../App";
+import { isLogin } from "../../App";
 
 const Login = () => {
 

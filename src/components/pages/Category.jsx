@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { base_url } from "../utils/constants";
+import { base_url } from "../../utils/constants";
 import { useState } from "react";
 import axios from "axios";
-import CategoryDetail from "./CategoryDetail";
-import Loader from "./Loader";
-import NoRecords from "./NoRecords";
+import CategoryDetail from "../CategoryDetail";
+import Loader from "../Loader";
+import NoRecords from "../NoRecords";
 
 const Cetegory = () => {
     const [pageNo, setPageNo] = useState(1);

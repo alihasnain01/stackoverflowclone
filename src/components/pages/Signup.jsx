@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import { isLogin } from "../App";
+import { isLogin } from "../../App";
 
 const Signup = () => {
 

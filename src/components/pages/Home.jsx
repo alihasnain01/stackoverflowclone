@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Issue from "./Issue";
-import { base_url } from "../utils/constants";
+import Issue from "../Issue";
+import { base_url } from "../../utils/constants";
 
 const Home = () => {
 
