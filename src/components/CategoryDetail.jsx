@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const CategoryDetail = (props) => {
     return (
         props ?
@@ -8,7 +10,7 @@ const CategoryDetail = (props) => {
 
                             {/* <a href="#" className="cursor-pointer"> */}
                             {/* <span className="absolute inset-0" aria-hidden="true" /> */}
-                            <p className="text-blue-500 text-sm font-medium ">{props.topic.name}</p>
+                            <Link to={`/categories/issues/${props.topic.id}`} className="text-blue-500 text-sm font-medium ">{props.topic.name}</Link>
                             <div className="flex space-x-2">
                                 <small className="mt-1.5 text-gray-600 mb-2 font-medium">Total: {props.topic.total_issues}</small>
                                 <small className="mt-1.5 text-gray-600 mb-2 font-medium">Today: {props.topic.today_issues}</small>

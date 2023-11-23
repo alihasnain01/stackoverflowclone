@@ -103,7 +103,7 @@ const IssueDetail = () => {
                         {issue.solutions.length > 0 ?
                             issue.solutions.map((item, index) => (
                                 <Solution key={index} issue={item} />
-                            )) : <p className="text-gray-400 font-semibold mt-5 ml-2">No solution yet</p>
+                            )) : <p className="text-gray-400 font-semibold mt-5 ml-1">No solution yet</p>
                         }
                     </div>
 

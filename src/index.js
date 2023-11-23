@@ -7,7 +7,8 @@ import IssueDetail from "./components/IssueDetail";
 import Aboutus from "./components/pages/Aboutus";
 import Contactus from "./components/Contactus";
 import reportWebVitals from "./reportWebVitals";
-import Category from "./components/pages/Category";
+import Category from "./components/pages/category/Category";
+import CategoryIssues from "./components/pages/category/CategoryIssues";
 import Login from "./components/pages/Login";
 import Signup from "./components/pages/Signup";
 import Users from "./components/Users";
@@ -25,6 +26,12 @@ const router = createBrowserRouter([
       {
         path: "/categories",
         element: <Category />,
+        children: [
+          {
+            path: "/categories/issues/:id",
+            element: <CategoryIssues />,
+          },
+        ],
       },
       {
         path: "/users",
@@ -49,7 +56,7 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <Signup />,
-      }
+      },
     ],
   },
 ]);
