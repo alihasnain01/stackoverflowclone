@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import Header from "./components/commons/Header";
+import Header from "./components/commons/header/Header";
 import { effect, signal } from "@preact/signals-react";
 
 const user = JSON.parse(localStorage.getItem('user'));
