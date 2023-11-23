@@ -94,23 +94,20 @@ const Home = () => {
                 <p className="mt-3 text-xl text-yellow-800 font-semibold">{topicName + ' (' + total + ')'}</p>
                 <div className="mt-5 mb-20">
                     <ul className="text-lg ml-1">
-                        {
-                            isIssueLoading &&
+                        {isIssueLoading &&
                             <div className="flex items-center justify-center mt-[160px]">
                                 <img src="https://img.icons8.com/fluent-systems-regular/100/000000/spinner.gif" alt="" />
                             </div>
                         }
-                        {
-                            !isIssueLoading && issues.length > 0 ?
-                                issues.map((item, index) => (
-                                    <Issue item={item} key={index} />
-                                ))
-                                : !isIssueLoading && <div className="text-2xl text-gray-400 ">No issues found</div>
+
+                        {!isIssueLoading && issues.length > 0 ?
+                            issues.map((item, index) => (
+                                <Issue item={item} key={index} />
+                            )) : !isIssueLoading && <div className="text-2xl text-gray-400 ">No issues found</div>
                         }
                     </ul>
 
-                    {
-                        (!isIssueLoading && issues.length > 0) &&
+                    {(!isIssueLoading && issues.length > 0) &&
                         <div className="flex justify-center md:justify-end space-x-1 mt-8">
                             <button className={prevPage ? "border-gray-800 font-bold p-2 underline underline-offset-4" : "p-2 text-gray-500 text-md"} disabled={!prevPage} onClick={() => setPageNo(pageNo - 1)}>Previous</button>
                             <span className='mt-2'> {pageNo} of {totalPage}</span>
