@@ -31,16 +31,15 @@ const Solution = (props) => {
 
     return (
         <div className="border border-gray-300 m-3 p-3 rounded-lg shadow-md" >
-            <div className="flex justify-between">
+            <div className="flex items-center justify-between">
                 <small className="text-xs text-blue-300 mx-1 font-semibold">({formatDate(props.issue.created_at)})</small>
                 <div className="relative" ref={dropdownRef}>
                     <img className="cursor-pointer" width="20" height="60" src="https://img.icons8.com/ios-glyphs/60/menu-2.png" alt="menu-2" onClick={() => setMenuOpen(!menuOpen)} />
                     {menuOpen && <div className="absolute w-24 rounded-lg top-4 right-3 border border-gray-300 shadow-lg bg-white">
-                        <li className="block m-5 text-sm font-semibold hover:cursor-pointer">Edit</li>
-                        <li className="block m-5 text-red-500 text-sm font-semibold hover:cursor-pointer">Delete</li>
+                        <button className="block w-full px-4 py-2 text-sm font-semibold hover:cursor-pointer hover:bg-gray-200">Edit</button>
+                        <button className="block w-full px-4 py-2 text-red-500 text-sm font-semibold hover:cursor-pointer hover:bg-gray-200">Delete</button>
                     </div>
                     }
-
                 </div>
             </div>
             <div className="mt-2 ml-1" dangerouslySetInnerHTML={{ __html: props.issue.description }} />
